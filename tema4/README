@@ -1,0 +1,25 @@
+
+TEMA4 PCOM README
+RADU ALBERTO-MIHAI 331CC
+
+Pentru rezolvarea temei am implementat functii pentru urmatoarele optiuni:
+
+Pentru register/login, daca la un moment dat nu este niciun utilizator logat pe server ( stringul sessionCookie este gol) se apeleaza functia reg, ca mai departe sa se introduca username ul si parola,
+acestea verificandu se daca contin " " sau nu, iar mai departe se creeaza un POST request, care  are ca date un JSON ce contine username ul si parola anterior tastate.Daca codul raspunsului este 201, 
+inseamna ca inregistrarea s a efectuat cu succes, daca este 400, inseamna ca a aparut o eroare care va fi afisata, iar daca codul este 429 inseamna ca au fost trimise prea multe requesturi.Login-il este realizat in mod asemanator doar ca se returneaza cookie ul primit.
+
+Pentru enter_library, am implementat functia access care primeste fd ul si cookie ul de sesiune, inclus in header ul requestului GET.Daca codul primit a fost 200, accesul la biblioteca s a realizat,
+daca codul primi a fost 401, accesul nu s a realizat deoarece cookie ul primit este necorespunzator, iar daca codul primit a fost 429, au fost trimise prea multe request uri.
+
+Pentru functiile aplicate cartilor, vom avea ca argument un JSON care contine token-ul care este in header ul Authorization, prefixat de cuvantul Bearer.Daca JSON ul este gol,
+requestul nu va fi construit, afisandu-se un mesaj de eroare.Astefel ca pentru get_books daca raspunsul e [] se afiseaza lista goala, altfel se afiseaza cartiile.Pentru get_book/delete_book se verifica token ul, ca mai departe sa se citeasca id ul cartii dorite, iar in caz ca id ul nu este un numar, se afiseaza un msj de eroare.Mai departe daca se primeste codul 200, cartea exista si se vor afisa informatiile acesteia,daca se primeste codul 404, nu exista id ul primit, iar pentru codul 429 s au primit prea multe request uri.Pentru add_book, se verifica token ul ca mai departe sa se citeasca informatiile depsre carte, se invalideaza doar daca page_count ul nu este numar, sau campurile nu au continut.Daca codul primit este 200, cartea a fost adaugata cu succes, iar daca codul este 429, au fost trimise prea multe request uri.
+
+Pentru logout se trimite un GET request care contine cookie ul de sesiune, iar daca codul primit a fost 200, utilizatorul a fost deconectat, acesta pierzand accesul la biblioteca,daca codul primit a fost 404, nu este niciun utilizator conectat, iar daca codul primit a fost 429, au fost trimise prea multe request uri.
+
+
+
+
+
+
+
+
